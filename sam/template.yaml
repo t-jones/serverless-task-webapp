@@ -4,7 +4,7 @@ Description: Tasks REST API Service
 
 Globals:
   Function:
-    Runtime: nodejs14.x
+    Runtime: nodejs16.x
     Timeout: 3
   Api:
     Cors:
@@ -25,6 +25,7 @@ Resources:
   MyAuthFunction:
     Type: AWS::Serverless::Function
     Properties:
+      Runtime: python3.7
       CodeUri: src/auth
       Handler: app.handler
 
@@ -96,7 +97,6 @@ Resources:
     Properties:
       CodeUri: src/handlers/getToken
       Handler: app.handler
-      Runtime: nodejs14.x
       Events:
         GetTokenFunctionApi:
           Type: Api
@@ -112,7 +112,6 @@ Resources:
     Properties:
       CodeUri: src/handlers/getSignedUrl
       Handler: app.handler
-      Runtime: nodejs14.x
       Environment:
         Variables:
           S3_BUCKET: !Ref UploadsBucket
